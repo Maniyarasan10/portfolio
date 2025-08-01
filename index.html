@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maniyarasan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Custom styles */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #111827; /* Dark Gray background */
+        color: #d1d5db; /* Light gray text */
+      }
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Section fade-in animation */
+      .section-fade-in {
+        opacity: 0;
+        transform: translateY(30px); /* Slightly increased translate */
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+      }
+      .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Custom gradient for hero - Darker theme */
+      .hero-gradient {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      }
+
+      /* Card hover effect - Subtle lift and glow */
+      .project-card:hover,
+      .achievement-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.2),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Adjusted shadow for dark */
+      }
+      /* Skill icon hover */
+      .skill-item i:hover {
+        transform: scale(1.1);
+        color: #6366f1; /* Indigo hover color */
+      }
+      /* Navbar link hover */
+      nav a:hover {
+        transform: scale(1.05);
+        color: #ffffff; /* White on hover */
+      }
+      /* Button hover enhancement */
+      .hero-button:hover {
+        transform: translateY(-2px) scale(1.03);
+        filter: brightness(1.1);
+      }
+      /* Add rounded corners globally via Tailwind config (alternative: add manually) */
+      /* Can't configure Tailwind here, so adding manually */
+      .rounded-card {
+        border-radius: 0.5rem; /* rounded-lg */
+      }
+      .rounded-button {
+        border-radius: 9999px; /* rounded-full */
+      }
+      .rounded-input {
+        border-radius: 0.375rem; /* rounded-md */
+      } /* Example if inputs were used */
+
+      /* Ensure icons have consistent transition */
+      .skill-item i {
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      nav a {
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .hero-button {
+        transition: transform 0.3s ease, filter 0.3s ease,
+          background-color 0.3s ease, color 0.3s ease;
+      }
+      /* Mobile menu background */
+      #mobile-menu {
+        background-color: #1f2937; /* Slightly lighter dark bg */
+        border-top: 1px solid #374151; /* Separator */
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <nav
+      class="bg-gray-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-700/50"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <a
+              href="#"
+              class="text-2xl font-bold text-indigo-400 hover:text-indigo-300 transition duration-300"
+              >coding...</a
+            >
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-6">
+              <a
+                href="#about"
+                class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >About</a
+              >
+              <a
+                href="#skills"
+                class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >Skills</a
+              >
+              <a
+                href="#projects"
+                class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >Projects</a
+              >
+              <a
+                href="#achievements"
+                class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >Achievements</a
+              >
+              <a
+                href="#contact"
+                class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >Contact</a
+              >
+            </div>
+          </div>
+
+          <div class="-mr-2 flex md:hidden">
+            <button
+              type="button"
+              id="mobile-menu-button"
+              class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+
+              <svg
+                class="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+              <svg
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:hidden hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a
+            href="#about"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >About</a
+          >
+          <a
+            href="#skills"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >Skills</a
+          >
+          <a
+            href="#projects"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >Projects</a
+          >
+          <a
+            href="#achievements"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >Achievements</a
+          >
+          <a
+            href="#contact"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero-gradient text-white">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center"
+      >
+        <h1
+          class="text-4xl md:text-6xl font-bold mb-4 leading-tight text-gray-50"
+        >
+          Maniyarasan
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-indigo-200">
+          B.E. Computer Science Engineering Student
+        </p>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto text-indigo-100">
+          Passionate about building innovative solutions and exploring Machine Learning,and Data Science.
+        </p>
+
+        <div
+          class="mt-10 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4"
+        >
+          <a
+            href="#projects"
+            class="hero-button bg-white text-indigo-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-button shadow-lg"
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            class="hero-button border-2 border-indigo-300 text-indigo-100 hover:bg-indigo-300 hover:text-gray-900 font-semibold py-3 px-8 rounded-button shadow-lg"
+          >
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 space-y-16 md:space-y-24"
+    >
+      <section id="about" class="section-fade-in">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-100"
+        >
+          About Me
+        </h2>
+
+        <div
+          class="bg-gray-800 p-8 rounded-card shadow-xl flex flex-col md:flex-row items-center border border-gray-700"
+        >
+          <div class="md:w-1/3 mb-6 md:mb-0 md:mr-8 text-center">
+            <img
+              src="profile3.jpg"
+              alt="Prasanna Venkatesan"
+              class="rounded-full mx-auto shadow-md w-40 h-40 md:w-48 md:h-48 object-cover border-4 border-indigo-500/50"
+            />
+          </div>
+          <div class="md:w-2/3">
+            <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+              I'm Maniyarasan, currently pursuing a Bachelor of
+              Engineering in Computer Science. I'm deeply enthusiastic about
+              technology and its potential to solve real-world problems.
+            </p>
+            <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+              Known as a
+              <strong class="text-indigo-400 font-semibold"
+                >tech enthusiast</strong
+              >, I actively seek out new challenges and continuously expand my
+              skillset. My current focus areas include
+              <strong class="text-indigo-400 font-semibold"
+                >Machine Learning</strong
+              >,
+              <strong class="text-indigo-400 font-semibold">Automation</strong>,
+              and
+              <strong class="text-indigo-400 font-semibold">Data Science</strong
+              >, alongside honing my software development abilities.
+            </p>
+            <p class="text-lg text-gray-300 leading-relaxed">
+              Beyond coding, I thrive in collaborative environments and enjoy
+              participating in hackathons and project expos to push my creative
+              and technical boundaries. I'm also committed to academic
+              excellence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section-fade-in">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-100"
+        >
+          Skills
+        </h2>
+        <div
+          class="bg-gray-800 p-8 rounded-card shadow-xl border border-gray-700"
+        >
+          <p class="text-lg text-center text-gray-400 mb-10">
+            Languages I'm proficient in and areas I'm actively exploring:
+          </p>
+
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center"
+          >
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fab fa-python fa-3x text-blue-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">Python</h3>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-file-word fa-3x text-blue-500 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">MS Office</h3>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fab fa-js-square fa-3x text-yellow-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">JavaScript</h3>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-brain fa-3x text-indigo-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">
+                Machine Learning
+              </h3>
+              <span class="text-sm text-gray-500">(Learning)</span>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-robot fa-3x text-purple-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">Automation</h3>
+              <span class="text-sm text-gray-500">(Learning)</span>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-database fa-3x text-red-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">Data Science</h3>
+              <span class="text-sm text-gray-500">(Learning)</span>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-laptop-code fa-3x text-teal-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">
+                Web Development
+              </h3>
+              <span class="text-sm text-gray-500">(Full Stack)</span>
+            </div>
+            <div class="skill-item p-5 bg-gray-700/50 rounded-lg shadow-md">
+              <i class="fas fa-bolt fa-3x text-gray-400 mb-3"></i>
+              <h3 class="text-xl font-semibold text-gray-200">Fast Learner</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section-fade-in">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-100"
+        >
+          Projects
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-indigo-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-indigo-400">
+              Certificate Portal</portal>
+            </h3>
+            <p class="text-gray-400 mb-4">
+             Developed a certificate portal for students to upload their certificates for inter-college events.
+            </p>
+
+            <span
+              class="inline-block bg-indigo-900/50 text-indigo-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >Full Stack</span
+            >
+            <span
+              class="inline-block bg-gray-700 text-gray-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >College Project</span
+            >
+          </div>
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-green-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-green-400">
+              AI-Powered disease prediction
+            </h3>
+            <p class="text-gray-400 mb-4">
+           Developed an AI-powered tool that predicts diseases based on user-reported symptoms.
+            </p>
+            <span
+              class="inline-block bg-green-900/50 text-green-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >Utility</span
+            >
+          </div>
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-red-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-red-400">
+              Vehicle Monitoring System
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Focused on accident prevention and road safety through vehicle
+              monitoring technology.
+            </p>
+            <span
+              class="inline-block bg-red-900/50 text-red-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >IoT/Safety</span
+            >
+          </div>
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-cyan-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-cyan-400">
+              AI-chat bot
+            </h3>
+            <p class="text-gray-400 mb-4">
+             Built an AI chatbot for summarizing letters efficiently.
+            </p>
+            <span
+              class="inline-block bg-cyan-900/50 text-cyan-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >AI</span
+            >
+            <span
+              class="inline-block bg-gray-700 text-gray-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >Education</span
+            >
+          </div>
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-purple-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-purple-400">
+              AirCanvas
+            </h3>
+            <p class="text-gray-400 mb-4">
+              An innovative project likely involving drawing or interaction in a
+              virtual/augmented space .
+            </p>
+            <span
+              class="inline-block bg-purple-900/50 text-purple-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >Creative Tech</span
+            >
+          </div>
+          <div
+            class="project-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-yellow-500/50"
+          >
+            <h3 class="text-xl font-semibold mb-2 text-yellow-400">
+              Mini Projects
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Developed numerous smaller projects exploring various technologies
+              and concepts.
+            </p>
+            <span
+              class="inline-block bg-yellow-900/50 text-yellow-300 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
+              >Exploration</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="achievements" class="section-fade-in">
+        <h2
+          class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-100"
+        >
+          Achievements
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="achievement-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-yellow-600/50 text-center"
+          >
+            <i class="fas fa-trophy fa-3x text-yellow-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2 text-yellow-300">
+              1st Place - 24hr Hackathon
+            </h3>
+            <p class="text-gray-400">
+              Robofest25, Karpaga Vinayaga College of Engg. & Tech.
+            </p>
+          </div>
+          <div
+            class="achievement-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-gray-600/50 text-center"
+          >
+            <i class="fas fa-award fa-3x text-gray-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2 text-gray-300">
+              3rd Prize - Project Expo
+            </h3>
+            <p class="text-gray-400">
+              Intera College Event, Mailam Engineering College.
+            </p>
+          </div>
+          <div
+            class="achievement-card bg-gray-800 p-6 rounded-card shadow-xl transition duration-300 ease-in-out border border-gray-700 hover:border-yellow-600/50 text-center"
+          >
+            <i class="fas fa-trophy fa-3x text-yellow-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2 text-yellow-300">
+              1st & 3rd Prize  - Project Expo
+            </h3>
+            <p class="text-gray-400">KVCET (Karpaga Vinayaga College).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section-fade-in text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-100">
+          Get In Touch
+        </h2>
+        <p class="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
+          I'm always open to discussing new projects, creative ideas, or
+          opportunities to be part of your visions. Feel free to connect with
+          me!
+        </p>
+
+        <div class="flex justify-center space-x-8">
+          <a
+            href="https://github.com/Maniyarasan10"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-indigo-400 transition duration-300 group"
+          >
+            <i class="fab fa-github fa-3x mb-1"></i>
+            <span class="block text-sm mt-1 group-hover:text-indigo-300"
+              >GitHub</span
+            >
+          </a>
+          <a
+            href="https://www.linkedin.com/in/maniyarasan-s-0275b5291"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-indigo-400 transition duration-300 group"
+          >
+            <i class="fab fa-linkedin fa-3x mb-1"></i>
+            <span class="block text-sm mt-1 group-hover:text-indigo-300"
+              >LinkedIn</span
+            >
+          </a>
+
+          <a
+            href="mailto:smaniyarasan0904@gmail.com"
+            class="text-gray-400 hover:text-indigo-400 transition duration-300 group"
+          >
+            <i class="fas fa-envelope fa-3x mb-1"></i>
+            <span class="block text-sm mt-1 group-hover:text-indigo-300"
+              >Email</span
+            >
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="bg-gray-900 text-gray-400 mt-16 md:mt-24 border-t border-gray-700/50"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <p>
+          &copy; <span id="current-year"></span> Maniyarasan All Rights Reserved.
+        </p>
+        <p class="text-sm text-gray-500 mt-1">Happy coding...</p>
+      </div>
+    </footer>
+
+    <script>
+      const sections = document.querySelectorAll(".section-fade-in");
+      const options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("section-visible");
+            // observer.unobserve(entry.target); // Keep observing if needed
+          } else {
+            // entry.target.classList.remove('section-visible'); // Remove if you want fade out
+          }
+        });
+      }, options);
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Mobile Menu Toggle
+      const menuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const openIcon = menuButton.querySelector("svg:first-of-type");
+      const closeIcon = menuButton.querySelector("svg:last-of-type");
+
+      menuButton.addEventListener("click", () => {
+        const expanded =
+          menuButton.getAttribute("aria-expanded") === "true" || false;
+        menuButton.setAttribute("aria-expanded", !expanded);
+        mobileMenu.classList.toggle("hidden");
+        openIcon.classList.toggle("hidden");
+        openIcon.classList.toggle("block");
+        closeIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("block");
+      });
+
+      // Close mobile menu when a link is clicked
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (mobileMenu.classList.contains("hidden") === false) {
+            menuButton.click(); // Simulate click to close
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
